@@ -4,10 +4,7 @@ import type { NavbarProps } from "@notestack/@types/props";
 import { HamburgerLeftIcon, HamburgerRightIcon } from "@notestack/assets/svg";
 import { getActivePage } from "@notestack/utils/active-page";
 
-export default function Navbar({
-  setIsSidebarOpen,
-  isSidebarOpen,
-}: NavbarProps) {
+const Navbar = ({ setIsSidebarOpen, isSidebarOpen }: NavbarProps) => {
   const { pathname } = useLocation();
   const currentPage = getActivePage(pathname);
 
@@ -36,4 +33,6 @@ export default function Navbar({
       </div>
     </header>
   );
-}
+};
+
+export default Navbar;

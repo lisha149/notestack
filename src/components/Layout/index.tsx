@@ -6,7 +6,7 @@ const isSidebarDefaultOpen = () => {
   return window.innerWidth >= 768; //Tablet and larger
 };
 
-export default function Layout({ children }: PropsWithChildren) {
+const Layout = ({ children }: PropsWithChildren) => {
   const [sidebarOpen, setSidebarOpen] = useState(isSidebarDefaultOpen());
 
   const handleResize = () => {
@@ -31,4 +31,6 @@ export default function Layout({ children }: PropsWithChildren) {
       </div>
     </div>
   );
-}
+};
+
+export default Layout;
