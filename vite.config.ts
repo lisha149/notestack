@@ -13,5 +13,10 @@ export default defineConfig({
       include: "**/*.svg?react",
     }),
   ],
+  resolve: {
+    alias: {
+      "@notestack": "/src",
+    },
+  },
   optimizeDeps: { exclude: ["node_modules/.cache"] },
 });
