@@ -3,11 +3,11 @@ import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 
 const isSidebarDefaultOpen = () => {
-  return window.innerWidth >= 1280;
+  return window.innerWidth >= 768; //Tablet and larger
 };
 
 export default function Layout({ children }: PropsWithChildren) {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(isSidebarDefaultOpen());
 
   const handleResize = () => {
     setSidebarOpen(isSidebarDefaultOpen());
@@ -21,7 +21,7 @@ export default function Layout({ children }: PropsWithChildren) {
 
   return (
     <div className="flex h-screen w-full bg-gray-50">
-      {/* Sidebar (desktop) */}
+      {/* Sidebar */}
       <Sidebar isSidebarOpen={sidebarOpen} handleClick={handleResize} />
 
       {/* Main content with navbar */}

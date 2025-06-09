@@ -11,17 +11,23 @@ export default function Navbar({
   const { pathname } = useLocation();
   const currentPage = getActivePage(pathname);
 
+  const isClickable = window.innerWidth >= 768;
+
   return (
     <header className="h-12 flex items-center px-4 gap-2 text-gray-600">
       {isSidebarOpen ? (
         <HamburgerLeftIcon
-          cursor="pointer"
-          onClick={() => setIsSidebarOpen((prev: boolean) => !prev)}
+          cursor={isClickable ? "pointer" : "auto"}
+          onClick={
+            isClickable ? () => setIsSidebarOpen((prev) => !prev) : undefined
+          }
         />
       ) : (
         <HamburgerRightIcon
-          cursor="pointer"
-          onClick={() => setIsSidebarOpen((prev: boolean) => !prev)}
+          cursor={isClickable ? "pointer" : "auto"}
+          onClick={
+            isClickable ? () => setIsSidebarOpen((prev) => !prev) : undefined
+          }
         />
       )}
 

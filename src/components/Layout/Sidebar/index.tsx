@@ -7,21 +7,32 @@ import { Link } from "react-router-dom";
 
 const Sidebar = ({ isSidebarOpen, handleClick }: SidebarProps) => {
   return (
-    <div className="flex flex-col h-screen w-64 overflow-hidden relative border-r border-gray-200">
-      <Link to="/" className="flex gap-1 items-center justify-center p-4">
+    <div
+      className={`flex flex-col h-screen 
+        ${isSidebarOpen ? "w-64" : "w-18"} 
+        overflow-hidden relative border-r border-gray-200 transition-all duration-300 ease-in`}
+    >
+      <Link
+        to="/"
+        className="flex gap-1 items-center justify-center p-4 transition-all duration-300 ease-in-out"
+      >
         <LogoIcon />
-        <span className="flex flex-col">
-          <span className="text-(--primary) text-primary-dark text-lg font-semibold leading-none">
-            NoteStack
+        {isSidebarOpen && (
+          <span className="flex flex-col">
+            <span className="text-(--primary) text-lg font-semibold leading-none">
+              NoteStack
+            </span>
+            <div className="text-sm text-gray-400 italic">
+              Stack your thoughts!
+            </div>
           </span>
-          <div className="text-sm text-gray-400 italic">
-            Stack your thoughts!
-          </div>
-        </span>
+        )}
       </Link>
 
       <div
-        className="flex flex-col gap-1 px-4 overflow-y-auto overflow-x-hidden"
+        className={`flex flex-col gap-1 overflow-y-auto overflow-x-hidden ${
+          isSidebarOpen ? "px-2" : "px-4"
+        }`}
         role="list"
       >
         {sidebarItems?.map((sidebarItem) => (
