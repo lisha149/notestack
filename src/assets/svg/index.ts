@@ -6,3 +6,5 @@ export { default as TrashNoteIcon } from "./trash-note.svg?react";
 //navbar
 export { default as HamburgerLeftIcon } from "./hamburger-left.svg?react";
 export { default as HamburgerRightIcon } from "./hamburger-right.svg?react";
+export { default as SunIcon } from "./sun.svg?react";
+export { default as MoonIcon } from "./moon.svg?react";

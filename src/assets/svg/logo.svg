@@ -15,7 +15,7 @@
 </defs>
 
 
-  <rect x="6" y="8" width="30" height="21" rx="2" stroke="url(#grad1)" stroke-width="2" fill="white"/>
-  <rect x="9" y="11" width="30" height="21" rx="2" stroke="url(#grad2)" stroke-width="2" fill="white" opacity="0.7"/>
-  <rect x="12" y="14" width="30" height="21" rx="2" stroke="url(#grad3)" stroke-width="2" fill="white" opacity="0.4"/>
+  <rect x="6" y="8" width="30" height="21" rx="2" stroke="url(#grad1)" stroke-width="2" fill="var(--layer-fill)" />
+  <rect x="9" y="11" width="30" height="21" rx="2" stroke="url(#grad2)" stroke-width="2" fill="var(--layer-fill)" opacity="0.7" />
+  <rect x="12" y="14" width="30" height="21" rx="2" stroke="url(#grad3)" stroke-width="2" fill="var(--layer-fill)" opacity="0.4" />
 </svg>

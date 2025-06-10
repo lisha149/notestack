@@ -20,7 +20,7 @@ const Layout = ({ children }: PropsWithChildren) => {
   }, []);
 
   return (
-    <div className="flex h-screen w-full bg-gray-50">
+    <div className="flex h-screen w-full dark:bg-gray-800 bg-gray-50">
       {/* Sidebar */}
       <Sidebar isSidebarOpen={sidebarOpen} handleClick={handleResize} />
 

@@ -1,7 +1,10 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --primary: #fd7210;
   --secondary: #fee140;
+  --layer-fill: #f9fafb;
   --gradient-primary-secondary: linear-gradient(
     90deg,
     var(--primary),
@@ -9,6 +12,9 @@
   );
 }
 
+.dark {
+  --layer-fill: #1f2937;
+}
 #root {
   width: 100%;
 }

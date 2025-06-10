@@ -10,13 +10,13 @@ const Sidebar = ({ isSidebarOpen, handleClick }: SidebarProps) => {
     <div
       className={`flex flex-col h-screen 
         ${isSidebarOpen ? "w-64" : "w-18"} 
-        overflow-hidden relative border-r border-gray-200 transition-all duration-300 ease-in`}
+        overflow-hidden relative border-r border-gray-200 dark:border-gray-700`}
     >
       <Link
         to="/"
         className="flex gap-1 items-center justify-center p-4 transition-all duration-300 ease-in-out"
       >
-        <LogoIcon />
+        <LogoIcon color="gray.50" />
         {isSidebarOpen && (
           <span className="flex flex-col">
             <span className="text-(--primary) text-lg font-semibold leading-none">
