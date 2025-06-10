@@ -20,13 +20,13 @@ const LinkItem = ({
       onClick={handleClick}
       title={label}
     >
-      <div className={`${isActive ? "text-white" : "text-gray-600"}`}>
+      <div className={`${isActive ? "text-white" : "text-(--text-color)"}`}>
         {icon}
       </div>
       {isSidebarOpen && (
         <span
           className={`text-sm font-medium whitespace-nowrap
-          ${isActive ? "text-white" : "text-gray-600"}
+          ${isActive ? "text-white" : "text-(--text-color)"}
         `}
         >
           {label}

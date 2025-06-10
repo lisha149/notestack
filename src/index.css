@@ -5,6 +5,7 @@
   --primary: #fd7210;
   --secondary: #fee140;
   --layer-fill: #f9fafb;
+  --text-color: #4b5563;
   --gradient-primary-secondary: linear-gradient(
     90deg,
     var(--primary),
@@ -14,6 +15,7 @@
 
 .dark {
   --layer-fill: #1f2937;
+  --text-color: #9ca3af;
 }
 #root {
   width: 100%;
