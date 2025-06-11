@@ -1,0 +1,79 @@
+import { motion } from "framer-motion";
+
+import {
+  CalendarIcon,
+  LovelyIcon,
+  MessageEditIcon,
+  TrashIcon,
+} from "@notestack/assets/svg";
+import type { NoteCardProps } from "@notestack/@types/props";
+
+const MAX_VISIBLE_TAGS = 1;
+
+const NoteCard = ({ note }: NoteCardProps) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      whileHover={{ scale: 1.03 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      className="bg-(--layer-fill) rounded-xl shadow-md border-l-4 border-(--secondary) p-4 flex flex-col justify-between"
+    >
+      <>
+        <div className="flex items-center justify-between">
+          <h3 className="text-lg font-bold text-(--primary)">{note.title}</h3>
+          <div className="flex items-center gap-1 text-sm text-(--text-color)">
+            <div className="text-(--secondary) dark:text-(--primary)">
+              <CalendarIcon />
+            </div>
+            {note.createdDate}
+          </div>
+        </div>
+
+        <p className=" text-(--text-color) text-sm mb-4">
+          {note.content.length > 80
+            ? note.content.slice(0, 80) + "..."
+            : note.content}
+        </p>
+
+        {note?.tags && note.tags.length > 0 && (
+          <div className="flex flex-wrap gap-2">
+            {note?.tags?.slice(0, MAX_VISIBLE_TAGS).map((tag, index) => (
+              <div
+                key={index}
+                className="text-xs font-medium px-2 py-1 rounded-full bg-(--secondary) dark:bg-(--primary) text-(--primary) dark:text-white cursor-auto"
+              >
+                {tag}
+              </div>
+            ))}
+            {note?.tags?.length > MAX_VISIBLE_TAGS && (
+              <div
+                title={note.tags.slice(MAX_VISIBLE_TAGS).join(", ")}
+                className="text-xs font-medium px-2 py-1 rounded-full bg-(--secondary) dark:bg-(--primary) text-(--primary) dark:text-white cursor-pointer"
+              >
+                +{note.tags.length - MAX_VISIBLE_TAGS}
+              </div>
+            )}
+          </div>
+        )}
+
+        <div className="flex items-center justify-between gap-2 pt-3">
+          <button className="cursor-pointer" title="Favorite">
+            <LovelyIcon />
+          </button>
+          <div className="flex items-center gap-2">
+            <button className="cursor-pointer text-(--primary)" title="Edit">
+              <MessageEditIcon />
+            </button>
+            <button className="cursor-pointer" title="Delete">
+              <TrashIcon />
+            </button>
+          </div>
+        </div>
+      </>
+    </motion.div>
+  );
+};
+
+export default NoteCard;
