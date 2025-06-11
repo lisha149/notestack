@@ -48,4 +48,15 @@ export type GenericInputProps<TFieldValues extends FieldValues> = {
 
 export type NoteCardProps = {
   note: NoteStoreType;
+  onEdit?: () => void;
+  onFavorite?: () => void;
+  onDelete?: () => void;
+};
+
+export type NoteModalProps = {
+  isModalOpen: boolean;
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  editId?: string;
+  setEditId: React.Dispatch<React.SetStateAction<string | undefined>>;
+  refetchNotes: () => void;
 };

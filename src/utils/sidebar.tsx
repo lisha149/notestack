@@ -1,8 +1,4 @@
-import {
-  FavoriteNoteIcon,
-  NoteIcon,
-  TrashNoteIcon,
-} from "@notestack/assets/svg";
+import { FavoriteNoteIcon, NoteIcon } from "@notestack/assets/svg";
 import { ROUTES } from "@notestack/routes/route.constant";
 
 export const sidebarItems = [
@@ -15,10 +11,5 @@ export const sidebarItems = [
     label: "Favorite Notes",
     icon: <FavoriteNoteIcon />,
     link: ROUTES.FAVORITE_NOTES,
-  },
-  {
-    label: "Trash Notes",
-    icon: <TrashNoteIcon />,
-    link: ROUTES.TRASH_NOTES,
   },
 ];

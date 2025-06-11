@@ -2,7 +2,6 @@ import { useRoutes } from "react-router-dom";
 
 import MyNotes from "@notestack/pages/MyNotes";
 import FavoriteNotes from "@notestack/pages/FavoriteNotes";
-import TrashNotes from "@notestack/pages/TrashNotes";
 import NotFound from "@notestack/components/NotFound";
 
 import { ROUTES } from "./route.constant";
@@ -16,10 +15,6 @@ const AppRoutes = () => {
     {
       path: ROUTES.FAVORITE_NOTES,
       element: <FavoriteNotes />,
-    },
-    {
-      path: ROUTES.TRASH_NOTES,
-      element: <TrashNotes />,
     },
     {
       path: ROUTES.NO_MATCH,

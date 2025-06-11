@@ -7,10 +7,11 @@ import {
   TrashIcon,
 } from "@notestack/assets/svg";
 import type { NoteCardProps } from "@notestack/@types/props";
+import { formatDateTime } from "@notestack/utils/format-date-time";
 
-const MAX_VISIBLE_TAGS = 1;
+const MAX_VISIBLE_TAGS = 3;
 
-const NoteCard = ({ note }: NoteCardProps) => {
+const NoteCard = ({ note, onEdit, onFavorite, onDelete }: NoteCardProps) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
@@ -22,12 +23,17 @@ const NoteCard = ({ note }: NoteCardProps) => {
     >
       <>
         <div className="flex items-center justify-between">
-          <h3 className="text-lg font-bold text-(--primary)">{note.title}</h3>
-          <div className="flex items-center gap-1 text-sm text-(--text-color)">
+          <h3 className="text-lg font-bold text-(--primary) truncate">
+            {note.title}
+          </h3>
+          <div className="flex items-center gap-2">
             <div className="text-(--secondary) dark:text-(--primary)">
               <CalendarIcon />
             </div>
-            {note.createdDate}
+            <div className="flex flex-col gap-0 text-xs text-(--text-color)">
+              <div>{formatDateTime(note.createdDate)?.split(",")?.[0]}</div>
+              <div>{formatDateTime(note.createdDate)?.split(",")?.[1]}</div>
+            </div>
           </div>
         </div>
 
@@ -58,17 +64,46 @@ const NoteCard = ({ note }: NoteCardProps) => {
           </div>
         )}
 
-        <div className="flex items-center justify-between gap-2 pt-3">
-          <button className="cursor-pointer" title="Favorite">
-            <LovelyIcon />
-          </button>
+        <div
+          className={`flex items-center ${
+            onFavorite ? "justify-between" : "justify-end"
+          } gap-2 pt-3`}
+        >
+          {onFavorite && (
+            <button
+              className="cursor-pointer"
+              title="Favorite"
+              onClick={onFavorite}
+            >
+              <LovelyIcon
+                className={
+                  note?.isFavorite
+                    ? "fill-red-500 text-red-500"
+                    : "fill-none text-gray-400"
+                }
+              />
+            </button>
+          )}
+
           <div className="flex items-center gap-2">
-            <button className="cursor-pointer text-(--primary)" title="Edit">
-              <MessageEditIcon />
-            </button>
-            <button className="cursor-pointer" title="Delete">
-              <TrashIcon />
-            </button>
+            {onEdit && (
+              <button
+                className="cursor-pointer text-(--primary)"
+                title="Edit"
+                onClick={onEdit}
+              >
+                <MessageEditIcon />
+              </button>
+            )}
+            {onDelete && (
+              <button
+                className="cursor-pointer"
+                title="Delete"
+                onClick={onDelete}
+              >
+                <TrashIcon />
+              </button>
+            )}
           </div>
         </div>
       </>
