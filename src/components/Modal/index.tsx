@@ -12,9 +12,10 @@ const Modal = ({
   title = "",
   children,
   handleSaveSubmit,
+  handleFavoriteSubmit,
   hasSave = true,
-  hasFavorite = false,
   onClose,
+  isFavorite,
 }: ModalProps) => {
   useEffect(() => {
     document.body.style.overflowY = isOpen ? "hidden" : "auto";
@@ -38,7 +39,7 @@ const Modal = ({
 
       <div
         className={
-          "relative  bg-(--layer-fill) rounded-2xl shadow-xl transition-all duration-300 w-[480px]"
+          "relative  bg-(--layer-fill) rounded-2xl shadow-xl transition-all duration-300 sm:w-[480px] w-[350px]"
         }
         style={{ top: isOpen ? "0" : "-100%" }}
         onClick={(e) => e.stopPropagation()}
@@ -49,30 +50,27 @@ const Modal = ({
             <CrossCircleIcon />
           </button>
           <h2 className=" font-semibold text-(--primary)">{title}</h2>
-          {(hasSave || hasFavorite) && (
-            <div className="flex gap-2">
-              {hasFavorite && (
-                <button
-                  onClick={() => {}}
-                  className="cursor-pointer"
-                  title="Favorite"
-                >
-                  <LovelyIcon />
-                </button>
-              )}
-              {hasSave && (
-                <button
-                  onClick={() => {
-                    handleSaveSubmit?.();
-                  }}
-                  className="cursor-pointer"
-                  title="Save"
-                >
-                  <TickCircleIcon />
-                </button>
-              )}
-            </div>
-          )}
+
+          <div className="flex gap-2">
+            {handleFavoriteSubmit && (
+              <button
+                onClick={() => handleFavoriteSubmit()}
+                className="cursor-pointer"
+                title="Favorite"
+              >
+                <LovelyIcon className={isFavorite ? "fill-red-500" : ""} />
+              </button>
+            )}
+            {hasSave && handleSaveSubmit && (
+              <button
+                onClick={() => handleSaveSubmit()}
+                className="cursor-pointer"
+                title="Save"
+              >
+                <TickCircleIcon />
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Modal Body */}

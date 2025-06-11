@@ -31,7 +31,9 @@ const Navbar = ({ setIsSidebarOpen, isSidebarOpen }: NavbarProps) => {
             }
           />
         )}
-        <span className="text-(--primary)">{currentPage?.label}</span>
+        <span className="text-(--primary) font-semibold">
+          {currentPage?.label}
+        </span>
       </div>
       <ToggleTheme />
     </header>

@@ -11,7 +11,13 @@ import { formatDateTime } from "@notestack/utils/format-date-time";
 
 const MAX_VISIBLE_TAGS = 3;
 
-const NoteCard = ({ note, onEdit, onFavorite, onDelete }: NoteCardProps) => {
+const NoteCard = ({
+  note,
+  onEdit,
+  onFavorite,
+  onDelete,
+  onView,
+}: NoteCardProps) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
@@ -19,15 +25,15 @@ const NoteCard = ({ note, onEdit, onFavorite, onDelete }: NoteCardProps) => {
       exit={{ opacity: 0, y: -10 }}
       whileHover={{ scale: 1.03 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      className="bg-(--layer-fill) rounded-xl shadow-md border-l-4 border-(--secondary) p-4 flex flex-col justify-between"
+      className="bg-(--card-bg) rounded-xl shadow-md border-l-4 border-(--secondary) p-4 flex flex-col justify-between"
     >
-      <>
-        <div className="flex items-center justify-between">
-          <h3 className="text-lg font-bold text-(--primary) truncate">
+      <div className="cursor-pointer" onClick={onView}>
+        <div className="flex items-center justify-between gap-4">
+          <h3 className="text-lg font-bold text-(--primary) truncate sm:max-w-[144px] md:max-w-[143px] lg:max-w-[214px]">
             {note.title}
           </h3>
           <div className="flex items-center gap-2">
-            <div className="text-(--secondary) dark:text-(--primary)">
+            <div className="text-(--text-color)">
               <CalendarIcon />
             </div>
             <div className="flex flex-col gap-0 text-xs text-(--text-color)">
@@ -37,14 +43,16 @@ const NoteCard = ({ note, onEdit, onFavorite, onDelete }: NoteCardProps) => {
           </div>
         </div>
 
-        <p className=" text-(--text-color) text-sm mb-4">
-          {note.content.length > 80
-            ? note.content.slice(0, 80) + "..."
-            : note.content}
+        <p
+          className={`text-(--text-color) text-sm mb-4 mt-2 wrap-break-word line-clamp-4 ${
+            note.tags.length > 0 ? "pb-0" : "pb-3"
+          }`}
+        >
+          {note.content}
         </p>
 
         {note?.tags && note.tags.length > 0 && (
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 pb-3">
             {note?.tags?.slice(0, MAX_VISIBLE_TAGS).map((tag, index) => (
               <div
                 key={index}
@@ -63,50 +71,50 @@ const NoteCard = ({ note, onEdit, onFavorite, onDelete }: NoteCardProps) => {
             )}
           </div>
         )}
+      </div>
 
-        <div
-          className={`flex items-center ${
-            onFavorite ? "justify-between" : "justify-end"
-          } gap-2 pt-3`}
-        >
-          {onFavorite && (
+      <div
+        className={`flex items-center ${
+          onFavorite ? "justify-between" : "justify-end"
+        } gap-2 pt-2`}
+      >
+        {onFavorite && (
+          <button
+            className="cursor-pointer"
+            title="Favorite"
+            onClick={onFavorite}
+          >
+            <LovelyIcon
+              className={
+                note?.isFavorite
+                  ? "fill-red-500 text-red-500"
+                  : "fill-none text-gray-400"
+              }
+            />
+          </button>
+        )}
+
+        <div className="flex items-center gap-2">
+          {onEdit && (
             <button
-              className="cursor-pointer"
-              title="Favorite"
-              onClick={onFavorite}
+              className="cursor-pointer text-(--primary)"
+              title="Edit"
+              onClick={onEdit}
             >
-              <LovelyIcon
-                className={
-                  note?.isFavorite
-                    ? "fill-red-500 text-red-500"
-                    : "fill-none text-gray-400"
-                }
-              />
+              <MessageEditIcon />
             </button>
           )}
-
-          <div className="flex items-center gap-2">
-            {onEdit && (
-              <button
-                className="cursor-pointer text-(--primary)"
-                title="Edit"
-                onClick={onEdit}
-              >
-                <MessageEditIcon />
-              </button>
-            )}
-            {onDelete && (
-              <button
-                className="cursor-pointer"
-                title="Delete"
-                onClick={onDelete}
-              >
-                <TrashIcon />
-              </button>
-            )}
-          </div>
+          {onDelete && (
+            <button
+              className="cursor-pointer"
+              title="Delete"
+              onClick={onDelete}
+            >
+              <TrashIcon />
+            </button>
+          )}
         </div>
-      </>
+      </div>
     </motion.div>
   );
 };

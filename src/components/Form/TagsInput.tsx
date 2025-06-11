@@ -7,7 +7,8 @@ import { CrossIcon } from "@notestack/assets/svg";
 const TagsInput = <TFieldValues extends FieldValues>({
   name,
   control,
-  placeholder = "Add a tag",
+  placeholder = "",
+  disabled,
 }: GenericInputProps<TFieldValues>) => {
   const {
     field: { value = [], onChange },
@@ -59,6 +60,7 @@ const TagsInput = <TFieldValues extends FieldValues>({
         onChange={(e) => setInput(e.target.value)}
         onKeyDown={handleKeyDown}
         placeholder={placeholder}
+        disabled={disabled}
       />
     </div>
   );

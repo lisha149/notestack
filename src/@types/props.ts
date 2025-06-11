@@ -38,12 +38,14 @@ export type ModalProps = {
   hasSave?: boolean;
   hasFavorite?: boolean;
   onClose: () => void;
+  isFavorite: boolean;
 };
 
 export type GenericInputProps<TFieldValues extends FieldValues> = {
   placeholder?: string;
   name: FieldPath<TFieldValues>;
   control: Control<TFieldValues>;
+  disabled: boolean;
 };
 
 export type NoteCardProps = {
@@ -51,6 +53,7 @@ export type NoteCardProps = {
   onEdit?: () => void;
   onFavorite?: () => void;
   onDelete?: () => void;
+  onView?: () => void;
 };
 
 export type NoteModalProps = {
@@ -59,4 +62,13 @@ export type NoteModalProps = {
   editId?: string;
   setEditId: React.Dispatch<React.SetStateAction<string | undefined>>;
   refetchNotes: () => void;
+  isViewMode: boolean;
+};
+
+export type NotesListProps = {
+  title: string;
+  notes: NoteStoreType[];
+  refetchNotes: () => void;
+  showAddButton?: boolean;
+  onAddClick?: () => void;
 };

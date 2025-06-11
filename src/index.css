@@ -7,6 +7,8 @@
   --layer-fill: #f9fafb;
   --text-color: #4b5563;
   --bg-light-color: #000000b3;
+  --card-bg: #f9fafb;
+  --grey: #2c3444;
   --gradient-primary-secondary: linear-gradient(
     90deg,
     var(--primary),
@@ -17,6 +19,7 @@
 .dark {
   --layer-fill: #1f2937;
   --text-color: #9ca3af;
+  --card-bg: #374151;
 }
 #root {
   width: 100%;
