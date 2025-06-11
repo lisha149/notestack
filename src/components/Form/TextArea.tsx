@@ -6,7 +6,7 @@ const TextArea = <TFieldValues extends FieldValues>({
   name,
   control,
   placeholder = "",
-  disabled,
+  disabled = false,
 }: GenericInputProps<TFieldValues>) => {
   const { field } = useController({
     name,

@@ -14,6 +14,8 @@ import { addUpdateNote, getNoteById } from "@notestack/services";
 import { handleFavoriteToggle } from "@notestack/utils/action";
 import { ROUTES } from "@notestack/routes/route.constant";
 
+import MarkDown from "../Form/MarkDown";
+
 const defaultValues: NoteFormType = { title: "", content: "", tags: [] };
 
 const NoteModal = ({
@@ -26,9 +28,10 @@ const NoteModal = ({
 }: NoteModalProps) => {
   const { pathname } = useLocation();
 
-  const { control, handleSubmit, setValue, reset } = useForm<NoteFormType>({
-    defaultValues,
-  });
+  const { control, handleSubmit, setValue, reset, watch } =
+    useForm<NoteFormType>({
+      defaultValues,
+    });
 
   const note = useMemo(() => getNoteById(editId), [editId]);
 
@@ -95,12 +98,17 @@ const NoteModal = ({
           control={control}
           disabled={isViewMode}
         />
-        <TextArea
-          name="content"
-          placeholder="Content..."
-          control={control}
-          disabled={isViewMode}
-        />
+        {isViewMode ? (
+          <div className="prose max-w-none text-(--text-color)">
+            <MarkDown content={watch("content")} />
+          </div>
+        ) : (
+          <TextArea<NoteFormType>
+            name="content"
+            placeholder="Write your note in markdown..."
+            control={control}
+          />
+        )}
         <TagsInput
           name="tags"
           placeholder={isViewMode ? "" : "Add tags here"}

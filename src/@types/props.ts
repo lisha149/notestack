@@ -45,7 +45,7 @@ export type GenericInputProps<TFieldValues extends FieldValues> = {
   placeholder?: string;
   name: FieldPath<TFieldValues>;
   control: Control<TFieldValues>;
-  disabled: boolean;
+  disabled?: boolean;
 };
 
 export type NoteCardProps = {
