@@ -6,21 +6,20 @@ A clean, minimal note-taking app **NoteStack** built with **React**, **TypeScrip
 
 ## Features
 
-- **Create / Edit / Delete Notes**
-- **Rich Markdown Support**
+- **Create / Edit / View / Delete Notes**
+- **Rich Markdown Support in View**
 - Headings (`#`, `##`, `###`)
 - Lists (bullet & numbered)
 - Links
-- Inline images with lazy loading & fallback
-- Code blocks with syntax highlighting
+-Images
 - **Search & Sort**
 - Search by title or tags
 - Sort by title or creation date
 - **Timestamps**
 - Auto-record note creation date
 - **Export**
-- Export all notes as [**JSON**](#)
-- Export all notes as [**CSV**](#)
+- Export all notes as JSON 
+- Export all notes as CSV
 - **Favorite Notes**
 - Mark/unmark notes as favorite
 - **Responsive UI**
