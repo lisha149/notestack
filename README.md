@@ -1,54 +1,57 @@
-# React + TypeScript + Vite
+# React Notes App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A clean, minimal note-taking app **NoteStack** built with **React**, **TypeScript**, and **Vite** -styled with **Tailwind CSS** — featuring markdown support, search, export, and responsive design with dark/light theme.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **Create / Edit / Delete Notes**
+- **Rich Markdown Support**
+- Headings (`#`, `##`, `###`)
+- Lists (bullet & numbered)
+- Links
+- Inline images with lazy loading & fallback
+- Code blocks with syntax highlighting
+- **Search & Sort**
+- Search by title or tags
+- Sort by title or creation date
+- **Timestamps**
+- Auto-record note creation date
+- **Export**
+- Export all notes as [**JSON**](#)
+- Export all notes as [**CSV**](#)
+- **Favorite Notes**
+- Mark/unmark notes as favorite
+- **Responsive UI**
+- Optimized for mobile & desktop screens
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Tech Stack
+
+- [React](https://reactjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vitejs.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [ESLint](https://eslint.org/) with type-aware config
+
+---
+
+## Setup & Run
+
+```bash
+# Clone the repo
+git clone https://github.com/lisha149/notestack.git
+cd notestack
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Live Demo
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+Check out the live app here: [View Demo](https://notestack-nine.vercel.app/)
