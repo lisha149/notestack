@@ -99,7 +99,7 @@ const NoteModal = ({
           disabled={isViewMode}
         />
         {isViewMode ? (
-          <div className="prose max-w-none text-(--text-color) p-2">
+          <div className="prose text-(--text-color) p-2 break-words">
             <MarkDown content={watch("content")} />
           </div>
         ) : (
@@ -109,12 +109,16 @@ const NoteModal = ({
             control={control}
           />
         )}
-        <TagsInput
-          name="tags"
-          placeholder={isViewMode ? "" : "Add tags here"}
-          control={control}
-          disabled={isViewMode}
-        />
+        {isViewMode && watch("tags")?.length === 0 ? (
+          <></>
+        ) : (
+          <TagsInput
+            name="tags"
+            placeholder={isViewMode ? "" : "Add tags here"}
+            control={control}
+            disabled={isViewMode}
+          />
+        )}
       </form>
     </Modal>
   );

@@ -36,7 +36,11 @@ const TagsInput = <TFieldValues extends FieldValues>({
   };
 
   return (
-    <div className="flex flex-wrap gap-2 border border-gray-200 dark:border-gray-600 rounded-xl p-2 w-full">
+    <div
+      className={`flex flex-wrap gap-2 ${
+        disabled ? "" : "border"
+      } border-gray-200 dark:border-gray-600 rounded-xl p-2 w-full`}
+    >
       {value.map((tag: string) => (
         <span
           key={tag}

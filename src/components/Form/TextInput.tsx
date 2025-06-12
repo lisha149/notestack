@@ -16,7 +16,11 @@ const TextInput = <TFieldValues extends FieldValues>({
   return (
     <input
       {...field}
-      className="border-none p-2 outline-0 text-md text-(--text-color)"
+      className={`border-none p-2 outline-0  ${
+        disabled
+          ? "text-(--primary) text-lg font-medium"
+          : "text-(--text-color) text-md"
+      }`}
       placeholder={placeholder}
       type="text"
       disabled={disabled}
