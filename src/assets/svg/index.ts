@@ -17,3 +17,5 @@ export { default as CrossCircleIcon } from "./cross-circle.svg?react";
 export { default as LovelyIcon } from "./lovely.svg?react";
 export { default as TrashIcon } from "./trash.svg?react";
 export { default as CrossIcon } from "./cross.svg?react";
+
+export { default as MenuIcon } from "./menu.svg?react";

@@ -12,6 +12,7 @@ import {
 import type { NotesListProps } from "@notestack/@types/props";
 import { MessageEditIcon } from "@notestack/assets/svg";
 
+import ExportDropdown from "../Button/ExportDropdown";
 import NoteModal from "../NoteModal";
 import Button from "../Button";
 import SortInput from "../Form/Sort";
@@ -45,38 +46,44 @@ const NotesList = ({
   return (
     <div className="flex gap-4 flex-col lg:h-full">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-        <div className="text-(--primary) border-b-2 font-medium cursor-auto max-w-fit">
+        <div className="text-(--primary) border-b-2 text-md font-medium cursor-auto max-w-fit p-1">
           {title}
         </div>
 
-        <div
-          className={`flex ${
-            showAddButton ? "flex-col sm:flex-row" : "sm:flex-row"
-          } md:flex-row gap-2 sm:items-center sm:gap-4 justify-between`}
-        >
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4">
           <SearchInput setSearchText={setSearchText} />
 
-          {showAddButton ? (
-            <div className="flex flex-row items-center gap-2 justify-between">
-              <SortInput onSort={setSortBy} />
-              <Button
-                icon={<MessageEditIcon />}
-                label="Add"
-                onClick={() => {
-                  setIsViewMode(false);
-                  setIsModalOpen(true);
-                }}
-              />
-            </div>
-          ) : (
-            <SortInput onSort={setSortBy} />
-          )}
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 w-full sm:w-auto">
+            {showAddButton ? (
+              <div className="w-full sm:w-auto flex justify-between sm:justify-start gap-3">
+                <SortInput onSort={setSortBy} />
+                <div className="flex gap-2 sm:gap-3 justify-end sm:justify-start">
+                  {showAddButton && (
+                    <Button
+                      icon={<MessageEditIcon />}
+                      label="Add"
+                      onClick={() => {
+                        setIsViewMode(false);
+                        setIsModalOpen(true);
+                      }}
+                    />
+                  )}
+                  <ExportDropdown notes={notes} />
+                </div>{" "}
+              </div>
+            ) : (
+              <div className="w-full sm:w-auto flex justify-end sm:justify-start gap-2">
+                <SortInput onSort={setSortBy} />
+                <ExportDropdown notes={notes} />
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
       <div className="rounded-md bg-(--layer-fill) dark:bg-(--grey) shadow-sm h-full">
         {filteredAndSortedNotes.length === 0 ? (
-          <NoDataAvailable content={`No ${title.toLowerCase()} yet.`} />
+          <NoDataAvailable content={`No ${title.toLowerCase()} added yet.`} />
         ) : (
           <div className="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredAndSortedNotes.map((note) => (

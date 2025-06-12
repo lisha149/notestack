@@ -99,13 +99,13 @@ const NoteModal = ({
           disabled={isViewMode}
         />
         {isViewMode ? (
-          <div className="prose max-w-none text-(--text-color)">
+          <div className="prose max-w-none text-(--text-color) p-2">
             <MarkDown content={watch("content")} />
           </div>
         ) : (
           <TextArea<NoteFormType>
             name="content"
-            placeholder="Write your note in markdown..."
+            placeholder="Content..."
             control={control}
           />
         )}

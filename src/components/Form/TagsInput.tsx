@@ -40,16 +40,20 @@ const TagsInput = <TFieldValues extends FieldValues>({
       {value.map((tag: string) => (
         <span
           key={tag}
-          className="flex items-end gap-[3px] bg-(--secondary) dark:bg-(--primary) text-(--primary) dark:text-white pl-2 pr-1 py-1 rounded-lg text-sm"
+          className={`flex items-end gap-[3px] bg-(--secondary) dark:bg-(--primary) text-(--primary) dark:text-white ${
+            !disabled ? "pl-2 pr-1 py-1" : "p-2"
+          }  rounded-lg text-sm`}
         >
           {tag}
-          <button
-            type="button"
-            onClick={() => removeTag(tag)}
-            className="cursor-pointer"
-          >
-            <CrossIcon />
-          </button>
+          {!disabled && (
+            <button
+              type="button"
+              onClick={() => removeTag(tag)}
+              className="cursor-pointer"
+            >
+              <CrossIcon />
+            </button>
+          )}
         </span>
       ))}
       <input

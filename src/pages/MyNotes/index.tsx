@@ -13,7 +13,7 @@ const MyNotes = () => {
 
   return (
     <NotesList
-      title="My Notes"
+      title="Notes"
       notes={notes}
       refetchNotes={refetchAllNotes}
       showAddButton
