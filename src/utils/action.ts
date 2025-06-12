@@ -9,7 +9,7 @@ export const handleFavoriteToggle = (id: string) => {
 
 export const handleDelete = (id: string) => {
   deleteNote(id);
-  toast.success("Note deleted");
+  toast.success("Note deleted.");
 };
 
 export const sortNotes = (
@@ -28,7 +28,7 @@ export const sortNotes = (
 };
 
 export const exportNotesAsJSON = (notes: NoteStoreType[]) => {
-  if (notes.length === 0) return toast.error("No notes to export");
+  if (notes.length === 0) return toast.error("No notes to export.");
   const jsonString = JSON.stringify(notes, null, 2);
   const blob = new Blob([jsonString], { type: "application/json" });
   const url = URL.createObjectURL(blob);
@@ -43,7 +43,7 @@ export const exportNotesAsJSON = (notes: NoteStoreType[]) => {
 };
 
 export const exportNotesAsCSV = (notes: NoteStoreType[]) => {
-  if (notes.length === 0) return toast.error("No notes to export");
+  if (notes.length === 0) return toast.error("No notes to export.");
 
   const headers = Object.keys(notes[0]);
   const csvRows = [

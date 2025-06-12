@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { toast } from "react-toastify";
 
 import NoteCard from "@notestack/components/Card";
 import NoDataAvailable from "@notestack/components/NoData";
@@ -10,7 +11,8 @@ import {
   sortNotes,
 } from "@notestack/utils/action";
 import type { NotesListProps } from "@notestack/@types/props";
-import { MessageEditIcon } from "@notestack/assets/svg";
+import { MessageEditIcon, TrashIcon } from "@notestack/assets/svg";
+import { deleteNote } from "@notestack/services";
 
 import ExportDropdown from "../Button/ExportDropdown";
 import NoteModal from "../NoteModal";
@@ -31,6 +33,8 @@ const NotesList = ({
   const [searchText, setSearchText] = useState<string | undefined>();
   const [sortBy, setSortBy] = useState<"date" | "title" | undefined>("date");
 
+  const [selectedNoteIds, setSelectedNoteIds] = useState<string[]>([]);
+
   const filteredAndSortedNotes = useMemo(() => {
     const filtered = notes.filter(
       (note) =>
@@ -42,6 +46,18 @@ const NotesList = ({
 
     return sortNotes(filtered, sortBy);
   }, [notes, searchText, sortBy]);
+
+  const handleDeleteSelectedNotes = () => {
+    if (selectedNoteIds.length === 0) {
+      return toast.warn("No notes selected.");
+    }
+
+    selectedNoteIds.forEach((id) => deleteNote(id));
+    refetchNotes();
+
+    setSelectedNoteIds([]);
+    toast.success("Selected notes deleted.");
+  };
 
   return (
     <div className="flex gap-4 flex-col lg:h-full">
@@ -85,31 +101,43 @@ const NotesList = ({
         {filteredAndSortedNotes.length === 0 ? (
           <NoDataAvailable content={`No ${title.toLowerCase()} added yet.`} />
         ) : (
-          <div className="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredAndSortedNotes.map((note) => (
-              <NoteCard
-                key={note.id}
-                note={note}
-                onView={() => {
-                  setIsViewMode(true);
-                  setEditId(note.id);
-                  setIsModalOpen(true);
-                }}
-                onEdit={() => {
-                  setIsViewMode(false);
-                  setEditId(note.id);
-                  setIsModalOpen(true);
-                }}
-                onDelete={() => {
-                  handleDelete(note.id);
-                  refetchNotes();
-                }}
-                onFavorite={() => {
-                  handleFavoriteToggle(note.id);
-                  refetchNotes();
-                }}
-              />
-            ))}
+          <div className="flex flex-col gap-4 p-4">
+            <button
+              className="cursor-pointer flex justify-end"
+              title="Delete Selected"
+              onClick={handleDeleteSelectedNotes}
+            >
+              <TrashIcon />
+            </button>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredAndSortedNotes.map((note) => (
+                <NoteCard
+                  key={note.id}
+                  note={note}
+                  selectedNoteIds={selectedNoteIds}
+                  setSelectedNoteIds={setSelectedNoteIds}
+                  onView={() => {
+                    setIsViewMode(true);
+                    setEditId(note.id);
+                    setIsModalOpen(true);
+                  }}
+                  onEdit={() => {
+                    setIsViewMode(false);
+                    setEditId(note.id);
+                    setIsModalOpen(true);
+                  }}
+                  onDelete={() => {
+                    handleDelete(note.id);
+                    refetchNotes();
+                  }}
+                  onFavorite={() => {
+                    handleFavoriteToggle(note.id);
+                    refetchNotes();
+                  }}
+                />
+              ))}
+            </div>
           </div>
         )}
       </div>

@@ -9,6 +9,8 @@ import {
 import type { NoteCardProps } from "@notestack/@types/props";
 import { formatDateTime } from "@notestack/utils/format-date-time";
 
+import Checkbox from "../Form/Checkbox";
+
 const MAX_VISIBLE_TAGS = 3;
 
 const NoteCard = ({
@@ -17,6 +19,8 @@ const NoteCard = ({
   onFavorite,
   onDelete,
   onView,
+  selectedNoteIds,
+  setSelectedNoteIds,
 }: NoteCardProps) => {
   return (
     <motion.div
@@ -32,6 +36,7 @@ const NoteCard = ({
           <h3 className="text-lg font-bold text-(--primary) truncate sm:max-w-[144px] md:max-w-[143px] lg:max-w-[214px]">
             {note.title}
           </h3>
+
           <div className="flex items-center gap-2">
             <div className="text-(--text-color)">
               <CalendarIcon />
@@ -78,22 +83,28 @@ const NoteCard = ({
           onFavorite ? "justify-between" : "justify-end"
         } gap-2 pt-2`}
       >
-        {onFavorite && (
-          <button
-            className="cursor-pointer"
-            title="Favorite"
-            onClick={onFavorite}
-          >
-            <LovelyIcon
-              className={
-                note?.isFavorite
-                  ? "fill-red-500 text-red-500"
-                  : "fill-none text-gray-400"
-              }
-            />
-          </button>
-        )}
-
+        <div className="flex gap-2 items-center">
+          <Checkbox
+            noteId={note?.id}
+            selectedNoteIds={selectedNoteIds}
+            setSelectedNoteIds={setSelectedNoteIds}
+          />
+          {onFavorite && (
+            <button
+              className="cursor-pointer"
+              title="Favorite"
+              onClick={onFavorite}
+            >
+              <LovelyIcon
+                className={
+                  note?.isFavorite
+                    ? "fill-red-500 text-red-500"
+                    : "fill-none text-gray-400"
+                }
+              />
+            </button>
+          )}
+        </div>
         <div className="flex items-center gap-2">
           {onEdit && (
             <button

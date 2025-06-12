@@ -48,7 +48,12 @@ export type GenericInputProps<TFieldValues extends FieldValues> = {
   disabled?: boolean;
 };
 
-export type NoteCardProps = {
+export type SelectedNoteProps = {
+  selectedNoteIds: string[];
+  setSelectedNoteIds: React.Dispatch<React.SetStateAction<string[]>>;
+};
+
+export type NoteCardProps = SelectedNoteProps & {
   note: NoteStoreType;
   onEdit?: () => void;
   onFavorite?: () => void;
@@ -71,4 +76,8 @@ export type NotesListProps = {
   refetchNotes: () => void;
   showAddButton?: boolean;
   onAddClick?: () => void;
+};
+
+export type NoteSelectCheckboxProps = SelectedNoteProps & {
+  noteId: string;
 };
