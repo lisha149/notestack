@@ -74,37 +74,17 @@ const MarkDown = ({ content }: { content: string }) => {
         blockquote: ({ node, ...props }) => (
           <blockquote
             style={{
-              borderLeft: "4px solid #ddd",
+              borderLeft: "4px solid #fee140",
               marginLeft: 0,
               paddingLeft: "1rem",
               color: "#666",
               fontStyle: "italic",
               marginBottom: "1rem",
-              backgroundColor: "#f9f9f9",
               borderRadius: "4px",
             }}
             {...props}
           />
         ),
-        code: ({ node, className, children, ...props }) => {
-          const style = {
-            backgroundColor: "#272822",
-            color: "#f8f8f2",
-            padding: "1em",
-            borderRadius: "5px",
-            fontFamily: "monospace",
-            fontSize: "0.9em",
-            display: "block",
-            overflowX: "auto" as React.CSSProperties["overflowX"],
-            marginBottom: "1rem",
-          };
-
-          return (
-            <code className={className} style={style} {...props}>
-              {children}
-            </code>
-          );
-        },
         img: ({ node, ...props }) => (
           <div style={{ textAlign: "center", margin: "20px 0" }}>
             <img
