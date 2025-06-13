@@ -7,7 +7,7 @@ import { CrossIcon } from "@notestack/assets/svg";
 const TagsInput = <TFieldValues extends FieldValues>({
   name,
   control,
-  placeholder = "",
+  placeholder = "Add tags (press Enter or ,)",
   disabled,
 }: GenericInputProps<TFieldValues>) => {
   const {
@@ -16,10 +16,12 @@ const TagsInput = <TFieldValues extends FieldValues>({
 
   const [input, setInput] = useState("");
 
-  const addTag = () => {
-    const newTag = input.trim();
-    if (newTag && !(value as string[]).includes(newTag)) {
-      onChange([...value, newTag]);
+  const tags = value as string[];
+
+  const addTag = (tag?: string) => {
+    const newTag: string = (tag ?? input).trim();
+    if (newTag && !tags.includes(newTag)) {
+      onChange([...tags, newTag]);
     }
     setInput("");
   };
@@ -28,9 +30,29 @@ const TagsInput = <TFieldValues extends FieldValues>({
     onChange(value.filter((tag: string) => tag !== tagToRemove));
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" || e.key === ",") {
       e.preventDefault();
+      addTag();
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value;
+    if (val.includes(",")) {
+      const parts = val.split(",");
+      parts.forEach((part) => {
+        const trimmed = part.trim();
+        if (trimmed) addTag(trimmed);
+      });
+      setInput("");
+    } else {
+      setInput(val);
+    }
+  };
+
+  const handleBlur = () => {
+    if (input.trim()) {
       addTag();
     }
   };
@@ -60,15 +82,17 @@ const TagsInput = <TFieldValues extends FieldValues>({
           )}
         </span>
       ))}
+
       <input
         type="text"
         className="flex-1 border-none outline-none text-sm text-(--text-color)"
         name={name}
         value={input}
-        onChange={(e) => setInput(e.target.value)}
-        onKeyDown={handleKeyDown}
-        placeholder={placeholder}
+        onChange={handleChange}
+        onKeyUp={handleKeyUp}
+        onBlur={handleBlur}
         disabled={disabled}
+        placeholder={placeholder}
       />
     </div>
   );
