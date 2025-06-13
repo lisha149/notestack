@@ -114,7 +114,9 @@ const NoteModal = ({
         ) : (
           <TagsInput
             name="tags"
-            placeholder={isViewMode ? "" : "Add tags here"}
+            placeholder={
+              isViewMode ? "" : "Add tags here..(press Enter or , after each)"
+            }
             control={control}
             disabled={isViewMode}
           />
