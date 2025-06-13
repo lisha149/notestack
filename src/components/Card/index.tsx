@@ -50,7 +50,7 @@ const NoteCard = ({
 
         <p
           className={`text-(--text-color) text-sm mb-4 mt-2 wrap-break-word line-clamp-4 ${
-            note.tags.length > 0 ? "pb-0" : "pb-3"
+            note.tags.length > 0 ? "pb-0 line-clamp-4" : "mb-2 line-clamp-5"
           }`}
         >
           {note.content}
