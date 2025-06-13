@@ -92,12 +92,16 @@ const NoteModal = ({
       isFavorite={note?.isFavorite ?? false}
     >
       <form className="flex flex-col gap-0">
-        <TextInput
-          name="title"
-          placeholder="Title"
-          control={control}
-          disabled={isViewMode}
-        />
+        {isViewMode && !watch("title") ? (
+          <></>
+        ) : (
+          <TextInput
+            name="title"
+            placeholder="Title"
+            control={control}
+            disabled={isViewMode}
+          />
+        )}
         {isViewMode ? (
           <div className="prose text-(--text-color) p-2 break-words">
             <MarkDown content={watch("content")} />
