@@ -38,7 +38,7 @@
   background-color: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: #9ca3af;
+  background-color: var(--secondary);
   border-radius: 8px;
 }
 
